@@ -1,4 +1,5 @@
-path = 'L8/phone.txt'
+
+path = 'L9/phone.txt'
 
 
 def showContacts():
@@ -7,7 +8,6 @@ def showContacts():
         if lines == '':
             lines = "Книга пуста"
     print(lines)
-    print()
 
 
 def searchContact():
@@ -96,13 +96,11 @@ def changeContact():
 def delContact():
     while (True):
         contactInd = int(input(
-            "Введите индекс контакта, который хотите удалить (для выхода нажмите 0) "))
+            "Введите индекс контакта, который хотите удалить "))
         with open(path, 'r', encoding='UTF-8') as data:
             lines = data.readlines()
             count = len(lines)
-        if contactInd == 0:
-            break
-        elif contactInd > 0 and contactInd <= count:
+        if contactInd > 0 and contactInd <= count:
             lines.pop(contactInd)
             count -= 1
             with open(path, 'w', encoding='UTF-8') as data:
@@ -113,40 +111,11 @@ def delContact():
                     item[0] = str(i)
                     lines[i] = ' '.join(item) + "\n"
                     data.write(lines[i])
+            break
         else:
             print("Ошибка! Попробуйте снова\n")
 
+
 def exit():
     print("Работа завершена. До скорых встреч!")
-    
-functionList = []
-functionList.insert(0, "Ошибка! Попробуйте снова.\n")
-functionList.insert(1, showContacts)
-functionList.insert(2, searchContact)
-functionList.insert(3, addContact)
-functionList.insert(4, changeContact)
-functionList.insert(5, delContact)
-choiceList = [1, 2, 3, 4, 5, 6]
-
-
-def menu():
-    print("Добро пожаловать в справочник контактов компании Ругугл:\n")
-    while (True):
-        print("1. Показать все контакты\n" +
-              "2. Найти контакт\n" +
-              "3. Добавить контакт\n" +
-              "4. Изменить контакт\n" +
-              "5. Удалить контакт\n" +
-              "6. Сохранить файл\n" +
-              "7. Выход\n")
-        choice = int(input("Выберите пункт меню "))
-        if choice in choiceList:
-            functionList[choice]()
-        elif choice == 7:
-            print("Работа завершена. До скорых встреч!")
-            break
-        else:
-            print(functionList[0])
-
-
-menu()
+    return False
